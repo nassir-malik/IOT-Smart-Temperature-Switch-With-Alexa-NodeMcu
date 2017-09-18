@@ -1,5 +1,5 @@
 {
-  "name": "Smart Switch Temperature & Humidity With Alexa",
+  "name": "Smart Switch Temp Humidity With Alexa",
   "description": "Works with IOT devices over the firewall with Alexa skills",
   "repository": "https://github.com/nassir-malik/IOT-Smart-Temperature-Switch-With-Alexa-NodeMcu/tree/master/Temperature-Humidity-Switch",
   "logo": "https://node-js-sample.herokuapp.com/node.png",
