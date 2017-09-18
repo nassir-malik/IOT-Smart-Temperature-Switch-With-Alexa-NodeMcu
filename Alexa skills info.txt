@@ -1,0 +1,46 @@
+smartswitch
+set switch trigger to {Numbers} percent {tmp_scale}
+{query} is the switch state
+{Switch_State} switch trigger
+set switch trigger to {Numbers} degree {tmp_scale}
+turn switch {Switch_State}
+{query} switch {Switch_State}
+{query} is the current {Sensor_Values}
+
+
+Slots
+AMAZON.NUMBER
+
+measurment_type
+humidity
+temperature
+
+query
+is
+what
+
+switchstate
+off
+on
+
+tempscale
+celsius
+fahrenheit
+
+
+Intent Slots
+Switch_State -->switchstate
+Sensor_Values-->measurment_type
+Numbers-->AMAZON.NUMBER
+query-->query
+tmp_scale-->tempscale
+
+
+smartswitch
+set switch trigger to {Numbers} percent {tmp_scale}
+{query} is the switch state
+{Switch_State} switch trigger
+set switch trigger to {Numbers} degree {tmp_scale}
+turn switch {Switch_State}
+{query} switch {Switch_State}
+{query} is the current {Sensor_Values}
