@@ -1,7 +1,7 @@
 /*
  *Netmedias
- *
- *  Created on: 24.05.2015
+ *https://github.com/nassir-malik/IOT-Smart-Temperature-Switch-With-Alexa-NodeMcu
+ *  Created on: 09.19.2017
  *  
  */
 #include <dht.h>
@@ -11,9 +11,9 @@
 #include <WebSocketsClient.h>
 #include <Hash.h>
 // @@@@@@@@@@@@@@@ You only need to modify wi-fi and domain info @@@@@@@@@@@@@@@@@@@@
-const char* ssid     = "enter your ssid"; //enter your ssid/ wi-fi(case sensitive) router name - 2.4 Ghz only
-const char* password = "enter ssid password";     // enter ssid password (case sensitive)
-char host[] = "smarttempswitch.herokuapp.com"; //192.168.0.100 - better your Heroku domain name like  "smarttempswitch.herokuapp.com" 
+const char* ssid     = "suddenlink.net-AD42"; //enter your ssid/ wi-fi(case sensitive) router name - 2.4 Ghz only
+const char* password = "G7MBSY89C601814";     // enter ssid password (case sensitive)
+char host[] = "smarttempswitch.herokuapp.com"; //- better your Heroku domain name like  "smarttempswitch.herokuapp.com" 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #define dht_dpin 14
 const int relayPin = 16;
@@ -154,8 +154,10 @@ void processWebScoketRequest(String data){
                     }
                 }else if(value=="humidity"){
                   //response with current humidity DHT.humidity
+                  jsonResponse.replace("<text>", "current humidity is " + String(DHT.humidity) + " percent");
                 }else if(value=="temperature"){  
                   //response with current temperature DHT.temperature /Celcius2Fahrenheit(DHT.temperature)
+                  jsonResponse.replace("<text>", "current temperature is " + String(Celcius2Fahrenheit(DHT.temperature))+ " fahrenheit");
                 }
             }else{//can not recognized the command
               Serial.println("Command is not recognized!");

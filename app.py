@@ -85,12 +85,12 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             # #wait for response and send it back to IFTTT
             self.rddata = await self.rwebsocket.recv()
             #
-            val ='{"version": "1.0","sessionAttributes": {},"response": {"outputSpeech": {"type": "PlainText","text": "It is done"},"shouldEndSession": true}}'
+            #val ='{"version": "1.0","sessionAttributes": {},"response": {"outputSpeech": {"type": "PlainText","text": "It is done"},"shouldEndSession": true}}'
             response = '\r\n'.join([
                 'HTTP/1.1 200 OK',
                 'Content-Type: text/json',
                 '',
-                '' + val,
+                '' + self.rddata,
             ])
         except Exception as e:
             print(e)
