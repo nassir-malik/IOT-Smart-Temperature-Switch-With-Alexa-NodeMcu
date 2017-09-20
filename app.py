@@ -64,14 +64,14 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
                 if 'value' in RequestJson['Sensor_Values'].keys():
                     if 'temperature' in RequestJson['Sensor_Values']['value']:
                         #print('What is the current temperature?')
-                        print({"object": "temperature", "value": "", "query": "?"})
-                        jsonRequest = {"object": "temperature", "value": "", "query": "?"}
+                        print({"object": "temperature", "value": "temperature", "query": "?"})
+                        jsonRequest = {"object": "temperature", "value": "temperature", "query": "?"}
                         # {"object":"humidity","query":"?"}
                     else:
                         print('What is the current humidity?')
                         # {"object":"humidity","query":"?"}
-                        print({"object": "humidity", "value": "", "query": "?"})
-                        jsonRequest = {"object": "humidity", "value": "", "query": "?"}
+                        print({"object": "humidity", "value": "humidity", "query": "?"})
+                        jsonRequest = {"object": "humidity", "value": "humidity", "query": "?"}
                 else:
                     print('What is the switch state?')
                     # {"object":"switch","query":"?"}

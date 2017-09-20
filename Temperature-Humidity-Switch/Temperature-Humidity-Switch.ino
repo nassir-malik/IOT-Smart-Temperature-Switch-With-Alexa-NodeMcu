@@ -11,11 +11,11 @@
 #include <WebSocketsClient.h>
 #include <Hash.h>
 // @@@@@@@@@@@@@@@ You only need to modify wi-fi and domain info @@@@@@@@@@@@@@@@@@@@
-const char* ssid     = "suddenlink.net-AD42"; //enter your ssid/ wi-fi(case sensitive) router name - 2.4 Ghz only
-const char* password = "G7MBSY89C601814";     // enter ssid password (case sensitive)
+const char* ssid     = "enter your ssid"; //enter your ssid/ wi-fi(case sensitive) router name - 2.4 Ghz only
+const char* password = "enter ssid password";     // enter ssid password (case sensitive)
 char host[] = "smarttempswitch.herokuapp.com"; //- better your Heroku domain name like  "smarttempswitch.herokuapp.com" 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-#define dht_dpin 14
+#define dht_dpin 14 
 const int relayPin = 16;
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 dht DHT;
@@ -139,13 +139,17 @@ void processWebScoketRequest(String data){
                       triggerName = object;
                       triggerVal = value;
                       triggerEnabled = 1;
+                      
                         
                     }
+                    jsonResponse.replace("<text>", "It is done");
                   
             }else if(query == "?"){ //if command then execute   
               Serial.println("Recieved query!");
               int state = digitalRead(relayPin);
               String value = root["value"];
+              //Serial.print("Value-->");
+              //Serial.print(value);
                 if(value=="switch"){
                  if(currState=="ON"){
                       message = "{\"state\":\"ON\"}";
@@ -154,9 +158,12 @@ void processWebScoketRequest(String data){
                     }
                 }else if(value=="humidity"){
                   //response with current humidity DHT.humidity
+                  Serial.println("Humidity response...");
                   jsonResponse.replace("<text>", "current humidity is " + String(DHT.humidity) + " percent");
+                  
                 }else if(value=="temperature"){  
                   //response with current temperature DHT.temperature /Celcius2Fahrenheit(DHT.temperature)
+                  Serial.println("Temp response...");
                   jsonResponse.replace("<text>", "current temperature is " + String(Celcius2Fahrenheit(DHT.temperature))+ " fahrenheit");
                 }
             }else{//can not recognized the command
@@ -164,10 +171,10 @@ void processWebScoketRequest(String data){
             }
             //jsonResponse.replace("<text>", "Garage door " + instance + " is " + message );
             Serial.print("Sending response back");
-            Serial.println(message);
+            Serial.println(jsonResponse);
                   // send message to server
-                  webSocket.sendTXT(message);
-                  if(query == "cmd" || query == "?"){webSocket.sendTXT(message);}
+                  webSocket.sendTXT(jsonResponse);
+                  if(query == "cmd" || query == "?"){webSocket.sendTXT(jsonResponse);}
 }
 
 void setTrigger(String obj, String val){
